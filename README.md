@@ -19,7 +19,7 @@ Go to the target folder location and run following command providing the city na
     
 **Customizing:**
  
- You can customize API endpoint and CSV file saving location by editing **config.properties** file found in **src/main/resources** folder location. 
+ You can customize API endpoint, CSV file name and CSV file saving location by editing **config.properties** file found in **src/main/resources** folder location. 
  
  1. **positions.endpoint** - API endpoint location
  2. **file.name** - Preferred file name of the CSV file
