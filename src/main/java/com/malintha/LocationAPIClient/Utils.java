@@ -33,7 +33,8 @@ public class Utils {
 
 
         String filename = propertyReader.getProperties().getProperty(APIClientConstants.FILE_NAME_PROPERTY);
-        String fileLocationPropertyVal = propertyReader.getProperties().getProperty(APIClientConstants.FILE_LOCATION_PROPERTY);
+        String fileLocationPropertyVal = propertyReader.getProperties().
+                getProperty(APIClientConstants.FILE_LOCATION_PROPERTY);
         String fileLocation = (fileLocationPropertyVal.equals("") || fileLocationPropertyVal.equals(null)) ?
                 System.getProperty(APIClientConstants.USER_HOME) : fileLocationPropertyVal;
 
@@ -54,7 +55,7 @@ public class Utils {
         try {
             //Creating filewriter object to write the CSV file
             fileWriter = new FileWriter(fileLocation + File.separator + filename);
-            LOGGER.info("Writing " + filename + " to " +fileLocation + " folder");
+            LOGGER.info("Writing " + filename + " file to " +fileLocation + " folder");
 
             //writing the header line
             fileWriter.append(FILE_HEADER);

@@ -40,7 +40,7 @@ public class APIClient {
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
         StringBuilder response = new StringBuilder();
-
+        //constructing  response
         while ((inputLine = in.readLine()) != null) {
             response.append(inputLine);
         }
