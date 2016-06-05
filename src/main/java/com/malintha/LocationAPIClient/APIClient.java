@@ -25,13 +25,12 @@ public class APIClient {
 
         String url =  propertyReader.getProperties().getProperty("position.endpoint") + location;
 
-        URL obj = new URL(url);
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        URL urlObj = new URL(url);
+        HttpURLConnection con = (HttpURLConnection) urlObj.openConnection();
 
         con.setRequestMethod("GET");
 
         int responseCode = con.getResponseCode();
-        LOGGER.info(String.valueOf(responseCode));
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
         StringBuilder response = new StringBuilder();
@@ -42,5 +41,4 @@ public class APIClient {
         in.close();
         return response.toString();
     }
-
 }

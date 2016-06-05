@@ -18,6 +18,7 @@ public class APIClientTester {
         PropertyReader propertyReader = new PropertyReader();
         APIClient apiClient = new APIClient(propertyReader);
 
+        //handling the case when user doesn't provide the city name
         if(args.length == 0) {
             LOGGER.error("City name has not been provided");
         }

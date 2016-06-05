@@ -44,10 +44,10 @@ public class Utils {
     public static void persistInFile(PropertyReader propertyReader, String response) throws JSONException, IOException {
 
 
-        String filename = propertyReader.getProperties().getProperty("file.name");
-        String fileLocationPropertyVal = propertyReader.getProperties().getProperty("file.location");
+        String filename = propertyReader.getProperties().getProperty(APIClientConstants.FILE_NAME_PROPERTY);
+        String fileLocationPropertyVal = propertyReader.getProperties().getProperty(APIClientConstants.FILE_LOCATION_PROPERTY);
         String fileLocation = (fileLocationPropertyVal.equals("") || fileLocationPropertyVal.equals(null)) ?
-                System.getProperty("user.home") : fileLocationPropertyVal;
+                System.getProperty(APIClientConstants.USER_HOME) : fileLocationPropertyVal;
         JSONArray locationArray = new JSONArray(response);
 
         Type listType = new TypeToken<List<LocationBean>>() {
@@ -77,16 +77,14 @@ public class Utils {
             }
 
         } catch (Exception e) {
-            LOGGER.error("Error while writing to the CSV file");
-            e.printStackTrace();
+            LOGGER.error("Error while writing to the CSV file " + e);
         } finally {
 
             try {
                 fileWriter.flush();
                 fileWriter.close();
             } catch (IOException e) {
-                LOGGER.error("Error while closing file writer");
-                e.printStackTrace();
+                LOGGER.error("Error while closing file writer" + e);
             }
         }
     }

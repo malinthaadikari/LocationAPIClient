@@ -19,7 +19,7 @@ public class PropertyReader {
 
     public Properties getProperties() throws IOException {
         Properties properties = new Properties();
-        String propertyFileName = "config.properties";
+        String propertyFileName = APIClientConstants.CONFIG_FILE_NAME;
 
         try {
 
