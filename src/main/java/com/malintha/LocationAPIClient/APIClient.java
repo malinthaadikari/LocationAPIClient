@@ -9,8 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.json.JSONException;
+import org.apache.commons.httpclient.HttpException;
 
 public class APIClient {
 
@@ -21,16 +20,20 @@ public class APIClient {
         this.propertyReader = propertyReader;
     }
 
-    public String getWeatherInfo(String location) throws IOException, JSONException {
+    public String getLocationInfo(String cityName) throws IOException {
 
-        String url =  propertyReader.getProperties().getProperty("position.endpoint") + location;
+        String url =  propertyReader.getProperties().getProperty(APIClientConstants.ENDPOINT_PROPERTY) + cityName;
 
         URL urlObj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) urlObj.openConnection();
 
         con.setRequestMethod("GET");
+        //Handling Bad request error.
+        if (Integer.toString(con.getResponseCode()).equals("400")){
+            LOGGER.error("Response 400 with bad request");
+            throw new HttpException("Bad Request");
+        }
 
-        int responseCode = con.getResponseCode();
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
         StringBuilder response = new StringBuilder();
