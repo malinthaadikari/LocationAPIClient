@@ -27,7 +27,9 @@ public class APIClientTester {
 
         //handling the case when user doesn't provide the city name
         if (args.length == 0) {
-            LOGGER.error("City name has not been provided. Please re-run with a city name");
+            LOGGER.error("City name has not been provided. Please re-run with a city name. \n " +
+                    "eg: java -jar GoEuroTest.jar \"Berlin\"");
+
         } else {
             response = apiClient.getLocationInfo(args[0]);
             if (new JSONArray(response).length() == 0) {
