@@ -28,7 +28,10 @@ public class APIClient {
         HttpURLConnection con = (HttpURLConnection) urlObj.openConnection();
 
         con.setRequestMethod("GET");
-        //Handling Bad request error.
+
+        LOGGER.debug("Got response with "+con.getResponseCode());
+
+        //Handling Bad request error
         if (Integer.toString(con.getResponseCode()).equals("400")){
             LOGGER.error("Response 400 with bad request");
             throw new HttpException("Bad Request");
@@ -42,6 +45,8 @@ public class APIClient {
             response.append(inputLine);
         }
         in.close();
+        LOGGER.debug("Response body :" + response.toString());
+
         return response.toString();
     }
 }
