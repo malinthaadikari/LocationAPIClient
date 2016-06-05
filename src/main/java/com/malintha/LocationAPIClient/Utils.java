@@ -37,25 +37,30 @@ public class Utils {
         String fileLocation = (fileLocationPropertyVal.equals("") || fileLocationPropertyVal.equals(null)) ?
                 System.getProperty(APIClientConstants.USER_HOME) : fileLocationPropertyVal;
 
+        //Creating JSON array from the string response of the API
         JSONArray locationArray = new JSONArray(response);
 
+        //If the response if empty we print a warning log
         if (locationArray.length() == 0) {
             LOGGER.warn("Location details does not exist");
         }
 
-        Type listType = new TypeToken<List<LocationBean>>() {
-        }.getType();
+        Type listType = new TypeToken<List<LocationBean>>() {}.getType();
+        //Creating list of LocationBean from the JSONArray
         List<LocationBean> locationInfoList = new Gson().fromJson(locationArray.toString(), listType);
 
         FileWriter fileWriter = null;
 
         try {
+            //Creating filewriter object to write the CSV file
             fileWriter = new FileWriter(fileLocation + File.separator + filename);
+            LOGGER.info("Writing " + filename + " to " +fileLocation + " folder");
 
+            //writing the header line
             fileWriter.append(FILE_HEADER);
-
             fileWriter.append(NEW_LINE_SEPARATOR);
 
+            //Lopping each item in JSONArray in to the CSV file
             for (LocationBean locationBean : locationInfoList) {
                 fileWriter.append(String.valueOf(locationBean.get_id()));
                 fileWriter.append(COMMA_DELIMITER);

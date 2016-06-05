@@ -22,7 +22,7 @@ public class PropertyReader {
         String propertyFileName = APIClientConstants.CONFIG_FILE_NAME;
 
         try {
-
+            //loading the property file into input stream
             inputStream = getClass().getClassLoader().getResourceAsStream(propertyFileName);
 
             if (inputStream != null) {
